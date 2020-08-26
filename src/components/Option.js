@@ -1,4 +1,14 @@
+var IBLorangetrans = "rgba(249,129,27,0.5)"
 
+function Radartitle(x,firstteam){
+  let distance = (6+20*x).toString() + "%";
+  let teamname = "Team"+ (firstteam).toString();
+  this.text= teamname;
+  this.left= distance;
+  this.top='20%';
+  this.textAlign='center';
+  console.log("title",firstteam)
+}
 
 function Radarradar(x){
   var centerx  = (20*x+10).toString()+"%";
@@ -76,7 +86,6 @@ function Radaroption(x,firstteam){
     this.series.push(new Radarseries(i))
     this.title.push(new Radartitle(i,firstteam))
   }
-  console.log("title",this.title)
 }
 
 

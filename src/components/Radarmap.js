@@ -93,7 +93,6 @@ class Radarmap extends React.Component {
     
           
       render(){
-        let radarop = new Radaroption(5)
         /*let radarop= Radaroption
         let data = this.state.data
         if(data.length > 0){
@@ -103,7 +102,7 @@ class Radarmap extends React.Component {
         };*/
         return (
             <div>
-                <ReactEcharts option={new Radaroption(5,0)}/>
+                <ReactEcharts option={new Radaroption(5, 0)}/>
             <div>
         </div>
             </div>
