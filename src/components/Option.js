@@ -67,8 +67,9 @@ function Radarseries(x){
 function Radaroption(x,firstteam){
   this.title=[];
   this.tooltip={
+    show:false,
     trigger: 'item',
-    formatter: "{a} <br/>{b} : {c} ({d}%)"
+    formatter: "{b}:{c}[0] "
 };
   this.legend={          //legend is the filter
     data: [],
@@ -90,3 +91,6 @@ function Radaroption(x,firstteam){
 
 
 export default Radaroption
+
+
+// people in the same group will be divided into different centers, how to display the charts
