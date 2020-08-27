@@ -1,28 +1,22 @@
 const axios = require('axios');
-
-const apiurl = "https://api.typeform.com/me"
 const access_token = "C6nnn3gxFoNkVArNGDKVs5CvHF4Nz3Qg9RMuQZRnHwdG"
-const requestOptions = {
-  url: `${apiurl}`,
-  method: 'GET',
-  responseType: 'json',
-  timeout: 10000,
-  headers: {
-    'Authorization': `${access_token}`,
-  },
-};
+const form_id = "D4yp6eda"
 
 axios({
   method: 'get',
-  url: 'https://api.typeform.com/me',
-  headers:{
-    'Authorization':`Bearer${C6nnn3gxFoNkVArNGDKVs5CvHF4Nz3Qg9RMuQZRnHwdG}`
+  url: 'https://api.typeform.com/forms/'+form_id+'/responses',
+  headers: {
+    'Authorization': 'Bearer '+ access_token,
   }
 })
-  .then(function (response) {
-    console.log(response.data)
+  .then(function (res) {
+    let num = res.data.total_items
+    let i = 0
+    for(i = 0; i<num;i++){
+    console.log(res.data.items[i].answers)
+    }
   }).catch((error)=>{
-    console.log(error.response)
+    console.log(error.res)
   });
 
 

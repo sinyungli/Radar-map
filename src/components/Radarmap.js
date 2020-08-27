@@ -1,7 +1,7 @@
 import * as React from "react";
 //import axios from "axios"; //this is API
 import Radaroption from "./Option"
-
+import axios from "axios";
 
 import ReactEcharts from 'echarts-for-react';
 
@@ -55,19 +55,30 @@ class Radarmap extends React.Component {
               IBLorangetrans:"rgba(249,129,27,0.5)"
   }
   
-  /*axiosFunc = () => {    //this function update the data
-    axios.get("/api").then(res => {
-      const data = res.data.data.data;
-      const locations = res.data.data.locations;
-      const challenges = res.data.data.challenges;
-      console.log(data);
-      this.setState({
-        data,
-        locations,
-        challenges
-      });
+  axiosFunc = () => {    //this function update the data
+    const access_token = "C6nnn3gxFoNkVArNGDKVs5CvHF4Nz3Qg9RMuQZRnHwdG"
+    const form_id = "D4yp6eda"
+ 
+    axios.get({
+      method: 'get',
+      url: 'https://api.typeform.com/forms/'+form_id+'/responses',
+      headers: {
+        'Authorization': 'Bearer '+ access_token,
+      }
+    }).then((res)=>{
+      let num = res.data.total_items
+      let i = 0
+      for(i = 0; i<num;i++){
+      console.log(res.data.items[i].answers)
+      }
+    }).catch((error)=>{
+      console.log(error.res)
     });
-  };*/
+  }
+
+  componentDidMount() {
+    this.axiosFunc()
+  }
   
   /*Showradar=(data,radaroption)=>{
     let radarop = radaroption
@@ -93,6 +104,7 @@ class Radarmap extends React.Component {
     
           
       render(){
+
         /*let radarop= Radaroption
         let data = this.state.data
         if(data.length > 0){

@@ -1,6 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
-import ReactEcharts from 'echarts-for-react';
 import Radarmap from "./components/Radarmap"
 
 function App(){
