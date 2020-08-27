@@ -4,7 +4,7 @@ const form_id = "D4yp6eda"
 
 axios({
   method: 'get',
-  url: 'https://api.typeform.com/forms/'+form_id+'/responses',
+  url: 'https://api.typeform.com/forms/'+access_token+'/responses',
   headers: {
     'Authorization': 'Bearer '+ access_token,
   }
@@ -12,9 +12,7 @@ axios({
   .then(function (res) {
     let num = res.data.total_items
     let i = 0
-    for(i = 0; i<num;i++){
-    console.log(res.data.items[i].answers)
-    }
+    console.log(res.data)
   }).catch((error)=>{
     console.log(error.res)
   });

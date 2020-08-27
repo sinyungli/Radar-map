@@ -1,3 +1,15 @@
+function dataconst(x){
+  this.locations = [];
+  this.challenges = [];
+  this.data = []
+  let i = 0
+  for(i;i<x;i++){
+    
+  }
+}
+
+
+
 /*export interface ChartState {
     data: Avenue[];
     locations: string[];

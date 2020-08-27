@@ -55,25 +55,26 @@ class Radarmap extends React.Component {
               IBLorangetrans:"rgba(249,129,27,0.5)"
   }
   
-  axiosFunc = () => {    //this function update the data
+  axiosFunc = async() => {    //this function update the data
+    const axios = require('axios');
     const access_token = "C6nnn3gxFoNkVArNGDKVs5CvHF4Nz3Qg9RMuQZRnHwdG"
     const form_id = "D4yp6eda"
- 
-    axios.get({
+    console.log(34)
+    try {
+  
+    var response = await axios({
       method: 'get',
       url: 'https://api.typeform.com/forms/'+form_id+'/responses',
       headers: {
-        'Authorization': 'Bearer '+ access_token,
+        'Authorization': 'Bearer '+access_token,
+
       }
-    }).then((res)=>{
-      let num = res.data.total_items
-      let i = 0
-      for(i = 0; i<num;i++){
-      console.log(res.data.items[i].answers)
-      }
-    }).catch((error)=>{
-      console.log(error.res)
-    });
+    })
+    console.log(response.data)
+    
+   }catch(e){
+      console.error(e.data)
+    }
   }
 
   componentDidMount() {
