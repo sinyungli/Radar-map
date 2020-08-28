@@ -1,13 +1,12 @@
 var IBLorangetrans = "rgba(249,129,27,0.5)"
 
-function Radartitle(x,firstteam){
-  let distance = (6+20*x).toString() + "%";
-  let teamname = "Team"+ (firstteam).toString();
+function Radartitle(title,x){
+  let distance = (10+20*x).toString() + "%";
+  let teamname = title
   this.text= teamname;
   this.left= distance;
-  this.top='20%';
+  this.top='10%';
   this.textAlign='center';
-  console.log("title",firstteam)
 }
 
 function Radarradar(x){
@@ -15,9 +14,11 @@ function Radarradar(x){
   this.center=[centerx,"50%"];
   this.radius= "50%";
   this.name={
-        
+    textStyle: {
+      color: 'rgb(100,100,100)',
+  }
       };
-    this.nameGap=0;
+    this.nameGap = 5;
     this.axisLine={   
         lineStyle: {
             color: 'rgba(100, 100, 100, 0.15)'
@@ -30,25 +31,24 @@ function Radarradar(x){
     };
      
     this.indicator= [
-          { name: 'Dimension1', max: 10},
-          { name: 'Dimension2', max: 10},
-          { name: 'Dimension3', max: 10},
-          { name: 'Dimension4', max: 10},
-          { name: 'Dimension5', max: 10},
+          { name: 'Teamwork', max: 5},
+          { name: 'Knowledge', max: 5},
+          { name: 'Problem solving', max: 5},
+          { name: 'Creativity', max: 5},
+          { name: 'Quality', max: 5},
+          { name: 'Presentation', max: 5}
       ]
     
 }
 
-function Radarseries(x){
+function Radarseries(value,title,x){
   this.type='radar';
-  this.radarIndex= x;
-  this.label= {
-        show: false
-      }
+  //this.radarIndex= ;
+  this.name = title
   // areaStyle: {normal: {}},
   this.data=[
       {
-          value: [3,3,3,3,3],//We may need to change this data
+          value: value,//We may need to change this data
           name: '',
           areaStyle: {
             color: IBLorangetrans
@@ -64,12 +64,11 @@ function Radarseries(x){
   ]
 }
 
-function Radaroption(x,firstteam){
+function Radaroption(value,place){
   this.title=[];
   this.tooltip={
-    show:false,
+    show:true,
     trigger: 'item',
-    formatter: "{b}:{c}[0] "
 };
   this.legend={          //legend is the filter
     data: [],
@@ -81,12 +80,12 @@ function Radaroption(x,firstteam){
     };
   this.radar = []
   this.series = []
-  for(let i = 0;i < x;i++){
-    this.legend.data.push("Team"+i.toString())
-    this.radar.push(new Radarradar(i))
-    this.series.push(new Radarseries(i))
-    this.title.push(new Radartitle(i,firstteam))
-  }
+  //for(let i = 0;i < x;i++){
+    this.legend.data.push(place)
+    this.radar.push(new Radarradar(1))
+    this.series.push(new Radarseries(value,place,1))
+    this.title.push(new Radartitle(place,1))
+  //}
 }
 
 

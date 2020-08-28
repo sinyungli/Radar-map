@@ -10,46 +10,7 @@ import ReactEcharts from 'echarts-for-react';
 class Radarmap extends React.Component {
 
   state = {
-              data: [{    //this is sample data wrote by oneself
-                name:"Avenue1",
-                teams:[{
-                  team_num: 1,
-                  value: [{
-                    challenge: "quantum music",
-                    criteria: "criteria",
-                    score: 2,
-                    fellow: "Tony",
-                    totalscore: 10,
-                  },{
-                    challenge: "health",
-                    criteria: "criteria",
-                    score: 1,
-                    fellow: "Tako",
-                    totalscore: 10,
-                  },
-                  {
-                    challenge: "quantum music",
-                    criteria: "criteria",
-                    score: 1,
-                    fellow: "Tony",
-                    totalscore: 10,
-                  },
-                  {
-                    challenge: "quantum music",
-                    criteria: "criteria",
-                    score: 1,
-                    fellow: "Tony",
-                    totalscore: 10,
-                  },
-                  {
-                    challenge: "quantum music",
-                    criteria: "criteria",
-                    score: 1,
-                    fellow: "Tony",
-                    totalscore: 10,
-                  }]
-                }],
-              }],
+              data: [],
               locations: ["Avenue1","Avenue2"],
               challenges: ["quantum music"],
               IBLorangetrans:"rgba(249,129,27,0.5)"
@@ -58,20 +19,19 @@ class Radarmap extends React.Component {
   axiosFunc = async() => {    //this function update the data
     const axios = require('axios');
     const access_token = "C6nnn3gxFoNkVArNGDKVs5CvHF4Nz3Qg9RMuQZRnHwdG"
-    const form_id = "D4yp6eda"
-    console.log(34)
+    const form_id = "hq372Yk9"
     try {
   
     var response = await axios({
       method: 'get',
       url: 'https://api.typeform.com/forms/'+form_id+'/responses',
       headers: {
-        'Authorization': 'Bearer '+access_token,
-
+        'Authorization': 'Bearer '+ access_token,
       }
+    })    
+    this.setState({
+      data:response.data.items
     })
-    console.log(response.data)
-    
    }catch(e){
       console.error(e.data)
     }
@@ -105,17 +65,36 @@ class Radarmap extends React.Component {
     
           
       render(){
-
-        /*let radarop= Radaroption
         let data = this.state.data
-        if(data.length > 0){
-          var show = <ReactEcharts option={this.Showradar(data[0],radarop,1)}/>
+        var show1
+        var show2 = ''
+        if(data){
+          for(let challenges of data){
+            let value = []
+            var place
+            if(challenges.answers[0].choice.label == "Hong Kong"){
+            for(let i = 4;i<10;i++){
+              value.push(Number(challenges.answers[i].choice.label))
+            }
+            place = challenges.answers[0].choice.label+" "+challenges.answers[1].choice.label+" "+challenges.answers[2].choice.label          
+            console.log("value",value)
+            
+            show1 = <ReactEcharts option={new Radaroption(value, place)}/>
         }else{
-          var show = "Loading"
-        };*/
+          for(let i =4;i<10;i++){
+            value.push(challenges.answers[i].choice.label)
+          }
+          place = challenges.answers[0].choice.label+" "+challenges.answers[1].choice.label+" "+challenges.answers[2].choice.label          
+        show2 = <ReactEcharts option={new Radaroption(value, place)}/>
+      }
+      }
+      }else{
+          show1 = "Loading"
+        };
         return (
             <div>
-                <ReactEcharts option={new Radaroption(5, 0)}/>
+                {show1}
+                {show2}
             <div>
         </div>
             </div>
