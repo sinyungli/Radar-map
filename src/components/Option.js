@@ -1,16 +1,15 @@
 var IBLorangetrans = "rgba(249,129,27,0.5)"
 
 function Radartitle(title,x){
-  let distance = (10+20*x).toString() + "%";
-  let teamname = title
-  this.text= teamname;
+  let distance = (20+60*x).toString() + "%";
+  this.text= title;
   this.left= distance;
   this.top='10%';
   this.textAlign='center';
 }
 
 function Radarradar(x){
-  var centerx  = (20*x+10).toString()+"%";
+  var centerx  = (60*x+20).toString()+"%";
   this.center=[centerx,"50%"];
   this.radius= "50%";
   this.name={
@@ -43,7 +42,7 @@ function Radarradar(x){
 
 function Radarseries(value,title,x){
   this.type='radar';
-  //this.radarIndex= ;
+  this.radarIndex=x;
   this.name = title
   // areaStyle: {normal: {}},
   this.data=[
@@ -80,12 +79,12 @@ function Radaroption(value,place){
     };
   this.radar = []
   this.series = []
-  //for(let i = 0;i < x;i++){
+  for(let i = 0;i < place.length;i++){
     this.legend.data.push(place)
-    this.radar.push(new Radarradar(1))
-    this.series.push(new Radarseries(value,place,1))
-    this.title.push(new Radartitle(place,1))
-  //}
+    this.radar.push(new Radarradar(i))
+    this.series.push(new Radarseries(value[i],place[i],i))
+    this.title.push(new Radartitle(place[i],i))
+  }
 }
 
 

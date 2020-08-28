@@ -69,23 +69,28 @@ class Radarmap extends React.Component {
         var show1
         var show2 = ''
         if(data){
+          let value1 = []
+          var place1 = []
+          let value2 = []
+          var place2 = []
           for(let challenges of data){
-            let value = []
-            var place
             if(challenges.answers[0].choice.label == "Hong Kong"){
+            value1.push([])
+            console.log(34)
             for(let i = 4;i<10;i++){
-              value.push(Number(challenges.answers[i].choice.label))
+              value1[value1.length-1].push(Number(challenges.answers[i].choice.label))
             }
-            place = challenges.answers[0].choice.label+" "+challenges.answers[1].choice.label+" "+challenges.answers[2].choice.label          
-            console.log("value",value)
-            
-            show1 = <ReactEcharts option={new Radaroption(value, place)}/>
+            place1.push(challenges.answers[0].choice.label+" "+challenges.answers[1].choice.label+" "+challenges.answers[2].choice.label)          
+            console.log("1",place1)
+            show1 = <ReactEcharts option={new Radaroption(value1, place1)}/>
         }else{
+          value2.push([])
+          console.log(value2[value2.length-1])
           for(let i =4;i<10;i++){
-            value.push(challenges.answers[i].choice.label)
+            value2[value2.length-1].push(Number(challenges.answers[i].choice.label))
           }
-          place = challenges.answers[0].choice.label+" "+challenges.answers[1].choice.label+" "+challenges.answers[2].choice.label          
-        show2 = <ReactEcharts option={new Radaroption(value, place)}/>
+          place2.push(challenges.answers[0].choice.label+" "+challenges.answers[1].choice.label+" "+challenges.answers[2].choice.label)          
+        show2 = <ReactEcharts option={new Radaroption(value2, place2)}/>
       }
       }
       }else{
